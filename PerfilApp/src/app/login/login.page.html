@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Iniciar sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  @if (registrado) {
+    <ion-text color="success">
+      <p>Cuenta creada. Ahora inicia sesión.</p>
+    </ion-text>
+  }
+
+  <ion-item>
+    <ion-label position="stacked">Correo</ion-label>
+    <ion-input type="email" [(ngModel)]="email" autocomplete="email" />
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Contraseña</ion-label>
+    <ion-input type="password" [(ngModel)]="password" autocomplete="current-password" />
+  </ion-item>
+
+  @if (error()) {
+    <ion-text color="danger">
+      <p>{{ error() }}</p>
+    </ion-text>
+  }
+
+  <ion-button expand="block" class="ion-margin-top" [disabled]="cargando()" (click)="iniciarSesion()">
+    @if (cargando()) {
+      <ion-spinner name="dots" />
+    } @else {
+      Iniciar sesión
+    }
+  </ion-button>
+
+  <ion-button expand="block" fill="clear" routerLink="/register">
+    ¿No tienes cuenta? Regístrate
+  </ion-button>
+</ion-content>
